@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import date
 
 DB_FILE = "database.db"
 
@@ -12,7 +13,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Mitglied (
     Nachname TEXT NOT NULL,
     Geburtsdatum DATE NOT NULL,
     E-Mail TEXT NOT NULL,
-    Eintrittsdatum DATE NOT NULL, 
+    Eintrittsdatum DATE NOT NULL
 );
 """)
 
@@ -20,7 +21,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Sportart (
 	SPA_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	Beitrag FLOAT NOT NULL, 
     Bezeichnung TEXT NOT NULL,
-    Ansprechpartner INTEGER NOT NULL, 
+    Ansprechpartner INTEGER NOT NULL 
 );
 """)
 
@@ -30,6 +31,8 @@ cur.execute("""CREATE TABLE IF NOT EXISTS tut (
     FOREIGN KEY (MG_ID) REFERENCES Mitglieder(MG_ID)
 );
 """)
+
+
 
 
 
