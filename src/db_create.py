@@ -8,19 +8,19 @@ cur = con.cursor()
 
 cur.execute("""CREATE TABLE IF NOT EXISTS Mitglied ( 
 	MG_ID INTEGER NOT NULL PRIMARY KEY,
-	Vorname TEXT NOT NULL 
-    Nachname TEXT NOT NULL
-    Geburtsdatum INTEGER NOT NULL
-    E-Mail TEXT NOT NULL
-    Eintrittsdatum INTEGER NOT NULL 
+	Vorname TEXT NOT NULL,
+    Nachname TEXT NOT NULL,
+    Geburtsdatum INTEGER NOT NULL,
+    E-Mail TEXT NOT NULL,
+    Eintrittsdatum INTEGER NOT NULL, 
 );
 """)
 
 cur.execute("""CREATE TABLE IF NOT EXISTS Sportart ( 
 	SPA_ID INTEGER NOT NULL PRIMARY KEY,
-	Beitrag TEXT NOT NULL 
-    Bezeichnung TEXT NOT NULL
-    Ansprechpartner INTEGER NOT NULL 
+	Beitrag TEXT NOT NULL, 
+    Bezeichnung TEXT NOT NULL,
+    Ansprechpartner INTEGER NOT NULL, 
 );
 """)
 
