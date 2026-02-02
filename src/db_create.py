@@ -24,3 +24,9 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Sportart (
 );
 """)
 
+cur.execute("""CREATE TABLE IF NOT EXISTS tut ( 
+	SPA_ID INTEGER NOT NULL,
+	TUT_ID TEXT NOT NULL PRIMARY KEY, 
+    MG_ID TEXT NOT NULL,
+);
+""")
