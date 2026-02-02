@@ -12,7 +12,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Mitglied (
 	Vorname TEXT NOT NULL,
     Nachname TEXT NOT NULL,
     Geburtsdatum DATE NOT NULL,
-    E-Mail TEXT NOT NULL,
+    EMail TEXT NOT NULL,
     Eintrittsdatum DATE NOT NULL
 );
 """)
@@ -27,8 +27,10 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Sportart (
 
 cur.execute("""CREATE TABLE IF NOT EXISTS tut ( 
 	TUT_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    SPA_ID INTEGER,
+    MG_ID INTEGER,
     FOREIGN KEY (SPA_ID) REFERENCES Sportart(SPA_ID),
-    FOREIGN KEY (MG_ID) REFERENCES Mitglieder(MG_ID)
+    FOREIGN KEY (MG_ID) REFERENCES Mitglied(MG_ID)
 );
 """)
 
