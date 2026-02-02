@@ -12,7 +12,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Mitglied (
 	Vorname TEXT NOT NULL,
     Nachname TEXT NOT NULL,
     Geburtsdatum DATE NOT NULL,
-    EMail TEXT NOT NULL,
+    Email TEXT NOT NULL,
     Eintrittsdatum DATE NOT NULL
 );
 """)
@@ -33,8 +33,3 @@ cur.execute("""CREATE TABLE IF NOT EXISTS tut (
     FOREIGN KEY (MG_ID) REFERENCES Mitglied(MG_ID)
 );
 """)
-
-
-
-
-

@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from datetime import date
 
 app = FastAPI()
-DB_FILE = "..\database.db"
+DB_FILE = "database.db"
 
 class MitgliedCreate(BaseModel):
     Vorname: str
