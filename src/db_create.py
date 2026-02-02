@@ -18,7 +18,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Mitglied (
 
 cur.execute("""CREATE TABLE IF NOT EXISTS Sportart ( 
 	SPA_ID INTEGER NOT NULL PRIMARY KEY,
-	Beitrag TEXT NOT NULL, 
+	Beitrag FLOAT NOT NULL, 
     Bezeichnung TEXT NOT NULL,
     Ansprechpartner INTEGER NOT NULL, 
 );
@@ -30,3 +30,4 @@ cur.execute("""CREATE TABLE IF NOT EXISTS tut (
     FOREIGN KEY (MG_ID) REFERENCES Mitglieder(MG_ID)
 );
 """)
+
