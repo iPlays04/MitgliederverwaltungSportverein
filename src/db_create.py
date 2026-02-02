@@ -10,9 +10,9 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Mitglied (
 	MG_ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	Vorname TEXT NOT NULL,
     Nachname TEXT NOT NULL,
-    Geburtsdatum INTEGER NOT NULL,
+    Geburtsdatum DATE NOT NULL,
     E-Mail TEXT NOT NULL,
-    Eintrittsdatum INTEGER NOT NULL, 
+    Eintrittsdatum DATE NOT NULL, 
 );
 """)
 
