@@ -17,6 +17,10 @@ class SportartCreate(BaseModel):
     Beitrag:float
     Bezeichnung:str
     Ansprechpartner:int
+    
+class AktivitaetCreate(BaseModel):
+    SPA_ID:int
+    MG_ID:int
 
 @app.get("/mitglieder")
 def get_mitglieder():
@@ -38,6 +42,19 @@ def get_sportarten():
     cur = con.cursor()
 
     cur.execute("SELECT * FROM Sportart")
+    rows = cur.fetchall()
+
+    con.close()
+
+    return [dict(row) for row in rows]
+
+@app.get("/aktivitaet")
+def get_aktivitaeten():
+    con = sqlite3.connect(DB_FILE)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM tut")
     rows = cur.fetchall()
 
     con.close()
@@ -86,12 +103,35 @@ def create_sportart(m: SportartCreate):
     ))
 
     con.commit()
-    mitglied_id = cur.lastrowid
+    sportart_id = cur.lastrowid
     con.close()
 
     return {
-        "status": "Mitglied erfolgreich angelegt",
-        "MG_ID": mitglied_id
+        "status": "Sportart erfolgreich angelegt",
+        "SPA_ID": sportart_id
+    }
+
+@app.post("/aktivitaeten")
+def create_aktivitaeten(m: AktivitaetCreate):
+    con = sqlite3.connect(DB_FILE)
+    cur = con.cursor()
+
+    cur.execute("""
+        INSERT INTO tut 
+        (SPA_ID, MG_ID)
+        VALUES (?, ?)
+    """, (
+        m.SPA_ID,
+        m.MG_ID
+    ))
+
+    con.commit()
+    tut_id = cur.lastrowid
+    con.close()
+
+    return {
+        "status": "Aktivitaet erfolgreich angelegt",
+        "tut_ID": tut_id
     }
 
 from fastapi import HTTPException
