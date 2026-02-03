@@ -113,3 +113,21 @@ def delete_mitglied(mitglied_id: int):
     con.close()
 
     return {"status": "Mitglied erfolgreich gelöscht", "MG_ID": mitglied_id}
+
+@app.delete("/sportarten/{sportart_id}")
+def delete_mitglied(sportart_id: int):
+    con = sqlite3.connect(DB_FILE)
+    cur = con.cursor()
+
+    # Prüfen, ob das Mitglied existiert
+    cur.execute("SELECT * FROM Mitglied WHERE SPA_ID = ?", (sportart_id,))
+    if cur.fetchone() is None:
+        con.close()
+        raise HTTPException(status_code=404, detail="Mitglied nicht gefunden")
+
+    # Mitglied löschen
+    cur.execute("DELETE FROM Mitglied WHERE SPA_ID = ?", (sportart_id,))
+    con.commit()
+    con.close()
+
+    return {"status": "Sportart erfolgreich gelöscht", "SPA_ID": sportart_id}
