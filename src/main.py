@@ -71,7 +71,7 @@ def create_mitglied(m: MitgliedCreate):
     }
 
 @app.post("/sportarten")
-def create_mitglied(m: SportartCreate):
+def create_sportart(m: SportartCreate):
     con = sqlite3.connect(DB_FILE)
     cur = con.cursor()
 
