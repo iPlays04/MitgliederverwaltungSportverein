@@ -52,3 +52,22 @@ def create_mitglied(m: MitgliedCreate):
         "MG_ID": mitglied_id
     }
 
+from fastapi import HTTPException
+
+@app.delete("/mitglieder/{mitglied_id}")
+def delete_mitglied(mitglied_id: int):
+    con = sqlite3.connect(DB_FILE)
+    cur = con.cursor()
+
+    # Prüfen, ob das Mitglied existiert
+    cur.execute("SELECT * FROM Mitglied WHERE MG_ID = ?", (mitglied_id,))
+    if cur.fetchone() is None:
+        con.close()
+        raise HTTPException(status_code=404, detail="Mitglied nicht gefunden")
+
+    # Mitglied löschen
+    cur.execute("DELETE FROM Mitglied WHERE MG_ID = ?", (mitglied_id,))
+    con.commit()
+    con.close()
+
+    return {"status": "Mitglied erfolgreich gelöscht", "MG_ID": mitglied_id}
