@@ -13,6 +13,11 @@ class MitgliedCreate(BaseModel):
     Email: str
     Eintrittsdatum: date
 
+class SportartCreate(BaseModel):
+    Beitrag:float
+    Bezeichnung:str
+    Ansprechpartner:int
+
 @app.get("/mitglieder")
 def get_mitglieder():
     con = sqlite3.connect(DB_FILE)
@@ -20,6 +25,19 @@ def get_mitglieder():
     cur = con.cursor()
 
     cur.execute("SELECT * FROM Mitglied")
+    rows = cur.fetchall()
+
+    con.close()
+
+    return [dict(row) for row in rows]
+
+@app.get("/sportarten")
+def get_sportarten():
+    con = sqlite3.connect(DB_FILE)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM Sportart")
     rows = cur.fetchall()
 
     con.close()
@@ -41,6 +59,30 @@ def create_mitglied(m: MitgliedCreate):
         m.Geburtsdatum,
         m.Email,
         m.Eintrittsdatum
+    ))
+
+    con.commit()
+    mitglied_id = cur.lastrowid
+    con.close()
+
+    return {
+        "status": "Mitglied erfolgreich angelegt",
+        "MG_ID": mitglied_id
+    }
+
+@app.post("/sportarten")
+def create_mitglied(m: SportartCreate):
+    con = sqlite3.connect(DB_FILE)
+    cur = con.cursor()
+
+    cur.execute("""
+        INSERT INTO Sportart 
+        (Beitrag, Bezeichnung, Ansprechpartner)
+        VALUES (?, ?, ?)
+    """, (
+        m.Beitrag,
+        m.Bezeichnung,
+        m.Ansprechpartner
     ))
 
     con.commit()
